@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block content %}
+{% if spectra %}
+<table class="table">
+  <thead>
+    <th>Object</th>
+    <th>Date</th>
+    <th>Wavelength</th>
+    <th>Observer</th>
+  </thead>
+  <tbody>
+  {% for spectrum in spectra %}
+    <tr>
+      <td>
+        <div class="media">
+          <a class="pull-left" href="{% url 'spectra:show' spectrum.id %}">
+            <img src="{% url 'spectra:plot_small' spectrum.id %}">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">{{ spectrum.target_name }}</h4>
+            {{ spectrum.instrument }}<br>
+            {{ spectrum.site }}
+          </div>
+        </div>
+      </td>
+      <td>{{ spectrum.date_obs }}</td>
+      <td>
+        {{ spectrum.wavelength_start|stringformat:"d" }} -
+        {{ spectrum.wavelength_end|stringformat:"d" }}
+      </td>
+      <td>{{ spectrum.observer }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+  No spectra to display
+{% endif %}
+{% endblock %}

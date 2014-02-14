@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-4">
+    <dl>
+      <dt>Observer</dt>
+      <dd>{{ spectrum.observer }}</dd>
+    </dl>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">FITS header</h3>
+      </div>
+      <div class="panel-body">
+        <pre class="small">{{ spectrum.header }}</pre>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="page-header">
+      <h1>{{ spectrum.target_name }}</h1>
+    </div>
+    <img src="/spectra/{{ spectrum.id }}/plot.png">
+  </div>
+</div>
+{% endblock %}

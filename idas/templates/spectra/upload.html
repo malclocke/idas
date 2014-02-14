@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block content %}
+
+<div class="page-header">
+  <h1>Upload Spectrum</h1>
+</div>
+
+{% if error_message %}
+<div class="alert alert-danger">
+  {{ error_message }}
+</div>
+{% endif %}
+
+<form enctype="multipart/form-data" action="{% url 'spectra:upload' %}"
+  role="form" method="post">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="fits">Fits file</label>
+    <input type="file" name="fits" id="fits">
+  </div>
+  <input type="submit" value="Upload" class="btn btn-default">
+</form>
+
+{% endblock %}
