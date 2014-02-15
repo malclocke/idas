@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 import pyfits
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
@@ -8,6 +9,7 @@ from spectra.extra import OneDimensionalSpectrumFileField
 
 class Spectrum(models.Model):
   fits = OneDimensionalSpectrumFileField(upload_to='spectra')
+  user = models.ForeignKey(User)
 
   def __unicode__(self):
     return self.target_name()

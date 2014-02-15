@@ -3,6 +3,8 @@ from django import forms
 from django.utils.translation import ugettext as _
 import pyfits
 
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules([], ["^spectra\.extra\.OneDimensionalSpectrumFileField"])
 class OneDimensionalSpectrumFileField(FileField):
 
     def clean(self, *args, **kwargs):

@@ -4,3 +4,4 @@ from spectra.models import Spectrum
 class SpectrumForm(forms.ModelForm):
     class Meta:
         model = Spectrum
+        exclude = ('user')

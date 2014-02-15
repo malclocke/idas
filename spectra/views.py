@@ -12,7 +12,9 @@ def upload(request):
     if request.method == 'POST':
         form = SpectrumForm(request.POST, request.FILES)
         if form.is_valid():
-            spectrum = form.save()
+            spectrum = form.save(commit=False)
+            spectrum.user = request.user
+            spectrum.save()
             return HttpResponseRedirect(reverse('spectra:index'))
 
     else:
