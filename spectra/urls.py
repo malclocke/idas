@@ -17,5 +17,6 @@ urlpatterns = patterns('spectra.views',
         name='show'),
     url(r'^(?P<spectrum_id>\d+)/plot.png$', 'plot', name='plot'),
     url(r'^(?P<spectrum_id>\d+)/plot-small.png$', 'plot_small', name='plot_small'),
+    url(r'^(?P<spectrum_id>\d+)/download$', 'download', name='download'),
     url(r'^upload/$', 'upload', name='upload'),
 )

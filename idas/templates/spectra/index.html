@@ -9,6 +9,7 @@
     <th>Date</th>
     <th>Wavelength</th>
     <th>Observer</th>
+    <th></th>
   </thead>
   <tbody>
   {% for spectrum in spectra %}
@@ -31,6 +32,12 @@
         {{ spectrum.wavelength_end|stringformat:"d" }}
       </td>
       <td>{{ spectrum.observer }}</td>
+      <td>
+        <a class="btn btn-primary"
+          href="{% url 'spectra:download' spectrum.id %}">
+          <span class="glyphicon glyphicon-save"></span>
+          FITS
+        </a>
     </tr>
   {% endfor %}
   </tbody>

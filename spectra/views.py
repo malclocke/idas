@@ -34,3 +34,9 @@ def plot_small(request, spectrum_id):
     response=HttpResponse(content_type='image/png')
     spectrum.print_png(response, figsize=(64,64), style='compact')
     return response
+
+def download(request, spectrum_id):
+    spectrum = get_object_or_404(Spectrum, pk=spectrum_id)
+    response=HttpResponse(spectrum.fits, content_type='image/fits')
+    response['Content-Disposition'] = 'attachment; filename=%s' % spectrum.fits.name.split('/')[-1]
+    return response
