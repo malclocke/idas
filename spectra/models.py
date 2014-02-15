@@ -4,9 +4,10 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 from matplotlib.dates import DateFormatter
 from specreduce.specreduce import BessSpectra
+from spectra.extra import OneDimensionalSpectrumFileField
 
 class Spectrum(models.Model):
-  fits = models.FileField(upload_to='spectra')
+  fits = OneDimensionalSpectrumFileField(upload_to='spectra')
 
   def __unicode__(self):
     return self.target_name()

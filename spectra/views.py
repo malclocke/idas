@@ -4,17 +4,21 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.views import generic
 from spectra.models import Spectrum
+from spectra.forms import SpectrumForm
 from specreduce.specreduce import BessSpectra
 
 
 def upload(request):
-  if request.method == 'POST':
-    spectrum = Spectrum(fits=request.FILES['fits'])
-    spectrum.save()
-    return HttpResponseRedirect(reverse('spectra:index'))
-  else:
-    context = {}
-    return render_to_response('spectra/upload.html', context,
+    if request.method == 'POST':
+        form = SpectrumForm(request.POST, request.FILES)
+        if form.is_valid():
+            spectrum = form.save()
+            return HttpResponseRedirect(reverse('spectra:index'))
+
+    else:
+        form = SpectrumForm()
+
+    return render_to_response('spectra/upload.html', {'form': form},
         context_instance=RequestContext(request))
 
 def plot(request, spectrum_id):
