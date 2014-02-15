@@ -260,3 +260,34 @@ class CorrectedSpectra(Plotable):
       self.wavelengths(), self.divided(), s=self.smoothing, k=self.k
     )
     return scipy.interpolate.splev(self.wavelengths(), tck)
+
+class ValidationError(Exception):
+  pass
+
+class IncorrectNumberOfAxesError(ValidationError):
+  pass
+
+class MissingCalibrationHeader(ValidationError):
+  pass
+
+class OneDimensionalSpectrumValidator:
+  def __init__(self, hdulist):
+    self.hdulist = hdulist
+
+  def validate(self):
+    headers = self.hdulist[0].header
+    self.validate_naxes(headers)
+    self.validate_calibration(headers)
+    return True
+
+  def validate_naxes(self, headers):
+    naxis = headers['NAXIS']
+    if naxis != 1:
+      raise IncorrectNumberOfAxesError(
+              'Wrong number of axes, expected NAXIS=1 but was %d' % naxis)
+
+  def validate_calibration(self, headers):
+    for header in ('CRPIX1', 'CRVAL1', 'CDELT1'):
+      if header not in headers:
+        raise MissingCalibrationHeader(
+                'Required wavelength calibration header %s was missing' % header)
