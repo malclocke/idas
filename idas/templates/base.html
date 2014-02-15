@@ -30,8 +30,12 @@
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li><a href="{% url 'spectra:index' %}">Spectra</a></li>
+              {% if user.is_authenticated %}
               <li><a href="{% url 'spectra:upload' %}">Upload</a></li>
+              {% endif %}
+              {% if perms.auth.staff %}
               <li><a href="/admin">Admin</a></li>
+              {% endif %}
             </ul>
           </div>
         </div>

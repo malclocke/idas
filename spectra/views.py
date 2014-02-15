@@ -3,11 +3,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 from spectra.models import Spectrum
 from spectra.forms import SpectrumForm
 from specreduce.specreduce import BessSpectra
 
-
+@login_required
 def upload(request):
     if request.method == 'POST':
         form = SpectrumForm(request.POST, request.FILES)
