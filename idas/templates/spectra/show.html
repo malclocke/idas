@@ -3,23 +3,31 @@
 {% block content %}
 <div class="row">
   <div class="col-md-4">
-    <dl>
-      <dt>Observer</dt>
-      <dd>{{ spectrum.observer }}</dd>
-    </dl>
+    <div class="page-header">
+      <h1>{{ spectrum.target_name }}</h1>
+    </div>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">FITS header</h3>
+        <h2 class="panel-title">Info</h2>
       </div>
       <div class="panel-body">
-        <pre class="small">{{ spectrum.header }}</pre>
+        <dl>
+          <dt>Observer</dt>
+          <dd>{{ spectrum.observer }}</dd>
+          <dt>Date</dt>
+          <dd>{{ spectrum.date_obs }}</dd>
+          <dt>Instrument</dt>
+          <dd>{{ spectrum.instrument }}</dd>
+          <dt>Site</dt>
+          <dd>{{ spectrum.site }}</dd>
+          <dt>Range</dt>
+          <dd>{{ spectrum.wavelength_start|stringformat:"d" }}
+              - {{spectrum.wavelength_end|stringformat:"d"}} {{ spectrum.units }}</dd>
+        </dl>
       </div>
     </div>
   </div>
   <div class="col-md-8">
-    <div class="page-header">
-      <h1>{{ spectrum.target_name }}</h1>
-    </div>
     <img src="/spectra/{{ spectrum.id }}/plot.png">
   </div>
 </div>

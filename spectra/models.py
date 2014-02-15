@@ -32,6 +32,9 @@ class Spectrum(models.Model):
   def site(self):
     return self.header_value('BSS_SITE', 'SITE')
 
+  def units(self):
+    return self.header_value('CUNIT1')
+
   def header(self):
     return pyfits.getheader(self.fits.path)
 
