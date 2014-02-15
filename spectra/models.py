@@ -61,13 +61,12 @@ class Spectrum(models.Model):
         x, y = figsize
         x = x / dpi
         y = y / dpi
-        fig=Figure(figsize=(x,y), dpi=dpi)
+        fig=Figure(figsize=(x,y), dpi=dpi, facecolor='white')
         ax=fig.add_subplot(111)
         if style == 'compact':
             ax.autoscale_view('tight')
             ax.get_xaxis().set_visible(False)
             ax.get_yaxis().set_visible(False)
-            fig.patch.set_facecolor('white')
         self.bess_spectrum().plot_onto(ax)
         canvas=FigureCanvas(fig)
         canvas.print_png(receiver)
