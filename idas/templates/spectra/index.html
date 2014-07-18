@@ -20,7 +20,7 @@
             <img src="{% url 'spectra:plot_small' spectrum.id %}">
           </a>
           <div class="media-body">
-            <h4 class="media-heading">{{ spectrum.target_name }}</h4>
+            <h4 class="media-heading"><a href="{% url 'spectra:show' spectrum.id %}">{{ spectrum.target_name }}</a></h4>
             {{ spectrum.instrument }}<br>
             {{ spectrum.site }}
           </div>
