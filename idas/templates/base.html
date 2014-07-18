@@ -37,6 +37,11 @@
               <li><a href="/admin">Admin</a></li>
               {% endif %}
             </ul>
+            {% if not user.is_authenticated %}
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/login/"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+            </ul>
+            {% endif %}
           </div>
         </div>
       </div>

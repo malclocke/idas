@@ -1,6 +1,8 @@
 # Django settings for idas project.
 import os
 
+LOGIN_REDIRECT_URL = '/spectra/'
+
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
 DEBUG = True
